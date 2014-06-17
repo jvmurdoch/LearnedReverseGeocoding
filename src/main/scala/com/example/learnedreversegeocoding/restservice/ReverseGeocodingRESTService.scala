@@ -31,7 +31,7 @@ private[learnedreversegeocoding] trait ReverseGeocodingRESTService extends HttpS
                 val future = MessageBrokerActor.broker ? RESTTrainRqst(rgp)
                 future.onComplete {
                   case Success(BROKERRestTrainResp(rgp3)) => requestContext.complete(rgp3.prettyPrint())
-                  case error => requestContext.complete(error.toString)
+                  case error => requestContext.complete("""{ "response" : "To err is human" }""")
                 }
               }
             }
@@ -44,7 +44,7 @@ private[learnedreversegeocoding] trait ReverseGeocodingRESTService extends HttpS
                   val future = MessageBrokerActor.broker ? RESTPredictRqst(rgp)
                   future.onComplete {
                     case Success(BROKERRestPredictResp(rgp4)) => requestContext.complete(rgp4.prettyPrint())
-                    case error => requestContext.complete(error.toString)
+                    case error => requestContext.complete("""{ "response" : "To err is human" }""")
                   }
                 }
               }
